@@ -14,7 +14,10 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "continuum"
   s.add_dependency 'hugs'
-  s.add_development_dependency 'vcr'
+  s.add_dependency 'rake'
+  s.add_development_dependency 'fakeweb'
+  s.add_development_dependency 'vcr', '1.5.0'
+  s.add_development_dependency 'autotest-standalone'
 
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")

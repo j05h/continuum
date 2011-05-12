@@ -1,0 +1,22 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://10.3.172.58:4242/aggregators
+    body: 
+    headers: 
+      connection: 
+      - keep-alive
+      keep-alive: 
+      - "30"
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - application/json
+      content-length: 
+      - "25"
+    body: "[\"min\",\"sum\",\"max\",\"avg\"]"
+    http_version: "1.1"
