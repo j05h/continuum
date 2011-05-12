@@ -36,18 +36,51 @@ describe Continuum::Client do
   describe :query do
     describe :json do
       before do
-        VCR.use_cassette 'query_json', :record => :new_episodes do
+        VCR.use_cassette 'query_json' do
           @data = @client.query(
-            :json  => true,
             :start => '2h-ago',
             :m     => ['sum:rate:proc.net.bytes', 'sum:rate:proc.stat.cpu']
           )
         end
       end
 
-      it 'should return data points' do
+      it 'should return metadata points' do
         expected = {"plotted"=>611, "points"=>1719, "etags"=>[["direction"], ["type"]], "timing"=>294}
         assert_equal expected, @data
+      end
+    end
+
+    describe :ascii do
+      before do
+        VCR.use_cassette 'query_ascii' do
+          @data = @client.query(
+            :format => 'ascii',
+            :start  => Time.new(2011,5,12,9,44,29),
+            :m      => ['sum:rate:proc.net.bytes', 'sum:rate:proc.stat.cpu']
+          )
+        end
+      end
+
+      it 'should return data points' do
+        lines = @data.split("\n")
+        assert_equal 'proc.net.bytes 1305211753 563002.2 iface=eth0 host=i-00000106', lines.first
+      end
+    end
+
+    describe :png do
+      before do
+        VCR.use_cassette 'query_png', :record => :new_episodes do
+          @data = @client.query(
+            :format => 'png',
+            :start  => Time.new(2011,5,12,9,44,29),
+            :m      => ['sum:rate:proc.net.bytes', 'sum:rate:proc.stat.cpu']
+          )
+        end
+      end
+
+      it 'should return data points' do
+        lines = @data.split("\n")
+        assert_equal "\x89PNG\r", lines.first
       end
     end
   end
