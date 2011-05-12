@@ -8,3 +8,7 @@ Rake::TestTask.new(:test) do |test|
 end
 
 Bundler::GemHelper.install_tasks
+
+task :irb do
+  exec 'irb -I.:lib -rubygems -rcontinuum'
+end
