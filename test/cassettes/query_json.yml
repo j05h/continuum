@@ -2,7 +2,7 @@
 - !ruby/struct:VCR::HTTPInteraction 
   request: !ruby/struct:VCR::Request 
     method: :get
-    uri: http://10.3.172.58:4242/aggregators?json=true
+    uri: http://10.3.172.58:4242/q?json=true&start=2h-ago&m=sum:rate:proc.net.bytes&m=sum:rate:proc.stat.cpu
     body: 
     headers: 
       accept: 
@@ -19,6 +19,6 @@
       content-type: 
       - application/json
       content-length: 
-      - "25"
-    body: "[\"min\",\"sum\",\"max\",\"avg\"]"
+      - "75"
+    body: "{\"plotted\":611,\"points\":1719,\"etags\":[[\"direction\"],[\"type\"]],\"timing\":294}"
     http_version: "1.1"

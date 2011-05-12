@@ -7,13 +7,76 @@ describe Continuum::Client do
 
   describe :aggregators do
     before do
-      VCR.use_cassette 'aggregators', :record => :new_episodes do
+      VCR.use_cassette 'aggregators' do
         @aggregators = @client.aggregators
       end
     end
 
     it 'returns all the aggregators' do
       assert_equal ["min","sum","max","avg"], @aggregators
+    end
+  end
+
+  describe :logs do
+    before do
+      VCR.use_cassette 'logs' do
+        @logs = @client.logs
+      end
+    end
+
+    it 'returns an array of logs' do
+      assert 1024, @logs.length
+    end
+
+    it 'has an approprate log message' do
+      assert_match /New I\/O server boss #1/, @logs.first
+    end
+  end
+
+  describe :query do
+    describe :json do
+      before do
+        VCR.use_cassette 'query_json', :record => :new_episodes do
+          @data = @client.query(
+            :json  => true,
+            :start => '2h-ago',
+            :m     => ['sum:rate:proc.net.bytes', 'sum:rate:proc.stat.cpu']
+          )
+        end
+      end
+
+      it 'should return data points' do
+        expected = {"plotted"=>611, "points"=>1719, "etags"=>[["direction"], ["type"]], "timing"=>294}
+        assert_equal expected, @data
+      end
+    end
+  end
+
+  describe :query_params do
+    before do
+      @hash = {
+        :json  => true,
+        :start => '2h-ago',
+        :m     => ['sum:rate:proc.net.bytes', 'sum:rate:proc.stat.cpu']
+      }
+    end
+
+    it 'should convert to query params when using an array' do
+      assert_equal 'json=true&start=2h-ago&m=sum:rate:proc.net.bytes&m=sum:rate:proc.stat.cpu', @client.query_params(@hash)
+    end
+
+    it 'should be empty' do
+      assert_equal '', @client.query_params({})
+    end
+
+    it 'should accept required parameters' do
+      assert_equal 'json=true&start=2h-ago&m=sum:rate:proc.net.bytes&m=sum:rate:proc.stat.cpu', @client.query_params(@hash, [:start, 'm'])
+    end
+
+    it 'should raise an argument exception if requirements are not met' do
+      assert_raises ArgumentError do
+        @client.query_params(@hash, [:required])
+      end
     end
   end
 end

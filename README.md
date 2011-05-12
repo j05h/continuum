@@ -13,9 +13,19 @@ Continuum integrates with the OpenTSDB API so that Ruby Applications can access 
 
 	> client = Continuum::Client.new '10.0.0.1', 4242
 	> client.aggregators
-  => ["min", "sum", "max", "avg"]
+  \=> ["min", "sum", "max", "avg"]
+
+	> client.logs.first
+	\=> "1305212010\tINFO\tNew I/O server boss #1 ([id: 0x7d8a8ce2, /0:0:0:0:0:0:0:0:4242])\tnet.opentsdb.tsd.ConnectionManager\t[id: 0x33f98d58, /10.0.0.2:63832 => /10.0.0.1:4242] CONNECTED: /10.0.0.2:63832"
+
+	> client.query(
+			:json  => true,
+			:start => '2h-ago',
+			:m     => ['sum:rate:proc.net.bytes', 'sum:rate:proc.stat.cpu']
+		)
+  \=> {"plotted"=>701, "points"=>1961, "etags"=>[["direction"], ["type"]], "timing"=>370}
 
 # Todo
-  * The rest of the Read API
-	* The write API
+* The rest of the Read API
+* The write API
 
