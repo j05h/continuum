@@ -40,6 +40,8 @@ Continuum integrates with the OpenTSDB API so that Ruby Applications can access 
 	> data.split("\n").first
   => "proc.net.bytes 1305211753 563002.2 iface=eth0 host=i-007"
 
+  > exit
+
 # Todo
 * The rest of the Read API
 * The write API

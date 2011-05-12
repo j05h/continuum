@@ -1,4 +1,5 @@
 module Continuum
+  # Create an instance of the client to interface with the OpenTSDB API (http://opentsdb.net/http-api.html)
   class Client
     # Create an connection to a specific OpenTSDB instance
     #
