@@ -1,10 +1,14 @@
 module Continuum
   class Client
     # Create an connection to a specific OpenTSDB instance
-    # Params:
+    #
+    # *Params:*
+    #
     # * host is the host IP (defaults to localhost)
     # * port is the host's port (defaults to 4242)
-    # Returns:
+    #
+    # *Returns:*
+    #
     # A client to play with
     def initialize host = '127.0.0.1', port = 4242
       @client = Hugs::Client.new(
@@ -16,8 +20,10 @@ module Continuum
     end
 
     # Lists the supported aggregators by this instance
-    # Returns:
-    # ["min", "sum", "max", "avg"]
+    #
+    # *Returns:*
+    #
+    # An array of aggregators.
     def aggregators
       response = @client.get '/aggregators?json=true'
       JSON.parse response.body
@@ -25,21 +31,27 @@ module Continuum
 
     # Lists an array of log lines. By default, OpenTSDB returns 1024 lines.
     # You can't modify that number via the API.
-    # Returns:
-    # ["1305217595\tINFO\tNew I/O server boss #1 ([id: 0x7d8a8ce2, /0:0:0:0:0:0:0:0:4242])\tnet.opentsdb.tsd.ConnectionManager\t[id: 0x50f38cf0, /10.0.0.2:64733 => /10.0.0.1:4242] CONNECTED: /10.0.0.2:64733",
-    #  "1305217595\tINFO\tNew I/O server boss #1 ([id: 0x7d8a8ce2, /0:0:0:0:0:0:0:0:4242])\tnet.opentsdb.tsd.ConnectionManager\t[id: 0x50f38cf0, /10.0.0.2:64733 => /10.0.0.1:4242] BOUND: /10.0.0.1:4242"]
+    #
+    # *Returns:*
+    #
+    # An array of log lines.
     def logs
       response = @client.get '/logs?json=true'
       JSON.parse response.body
     end
 
     # Queries the instance for a graph. 3 (useful) formats are supported:
-    # ASCII returns data that is suitable for graphing or otherwise interpreting on the client
-    # JSON returns meta data for the query
-    # PNG returns a PNG image you can render on the client
+    #
+    # * ASCII returns data that is suitable for graphing or otherwise interpreting on the client
+    # * JSON returns meta data for the query
+    # * PNG returns a PNG image you can render on the client
+    #
     #
     # Params (See http://opentsdb.net/http-api.html#/q_Parameters for more information):
+    #
+    #
     # options a hash which may include the following keys:
+    #
     # * format (one of json, ascii, png), defaults to json.
     # * start	The query's start date. (required)
     # * end	The query's end date.
@@ -59,6 +71,7 @@ module Continuum
     # * nocache	Forces TSD to ignore cache and fetch results from HBase.
     #
     # The syntax for metrics (m) (square brackets indicate an optional part):
+    #
     # AGG:[interval-AGG:][rate:]metric[{tag1=value1[,tag2=value2...]}]
     def query options = {}
       format = options.delete(:format) || options.delete('format') || 'json'
@@ -74,10 +87,10 @@ module Continuum
     end
 
     # Parses a query param hash into a query string as expected by OpenTSDB
-    # Params:
+    # *Params:*
     # * params the parameters to parse into a query string
     # * requirements: any required parameters
-    # Returns:
+    # *Returns:*
     # A query string
     # Raises:
     # ArgumentError if a required parameter is missing
