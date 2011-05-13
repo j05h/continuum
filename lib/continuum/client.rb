@@ -87,6 +87,15 @@ module Continuum
       end
     end
 
+    # Stats about the OpenTSDB server itself.
+    #
+    # Returns:
+    # An array of stats.
+    def stats
+      response = @client.get '/stats?json'
+      JSON.parse response.body
+    end
+
     # Parses a query param hash into a query string as expected by OpenTSDB
     # *Params:*
     # * params the parameters to parse into a query string

@@ -69,7 +69,7 @@ describe Continuum::Client do
 
     describe :png do
       before do
-        VCR.use_cassette 'query_png', :record => :new_episodes do
+        VCR.use_cassette 'query_png' do
           @data = @client.query(
             :format => 'png',
             :start  => Time.new(2011,5,12,9,44,29),
@@ -78,10 +78,22 @@ describe Continuum::Client do
         end
       end
 
-      it 'should return data points' do
+      it 'should return a PNG' do
         lines = @data.split("\n")
         assert_equal "\x89PNG\r", lines.first
       end
+    end
+  end
+
+  describe :stats do
+    before do
+      VCR.use_cassette 'stats' do
+        @stats = @client.stats
+      end
+    end
+
+    it 'should return stats' do
+      assert_equal 43, @stats.length
     end
   end
 

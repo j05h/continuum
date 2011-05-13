@@ -1,0 +1,24 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://10.3.172.58:4242/stats?json
+    body: 
+    headers: 
+      accept: 
+      - 
+      connection: 
+      - keep-alive
+      keep-alive: 
+      - 30
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - application/json
+      content-length: 
+      - "2918"
+    body: "[\"tsd.connectionmgr.connections 1305305539 8 host=i-00000106\",\"tsd.connectionmgr.exceptions 1305305539 0 host=i-00000106\",\"tsd.rpc.received 1305305539 118653 type=telnet host=i-00000106\",\"tsd.rpc.received 1305305539 8 type=http host=i-00000106\",\"tsd.rpc.exceptions 1305305539 0 host=i-00000106\",\"tsd.http.latency_50pct 1305305539 4 type=all host=i-00000106\",\"tsd.http.latency_75pct 1305305539 6 type=all host=i-00000106\",\"tsd.http.latency_90pct 1305305539 8 type=all host=i-00000106\",\"tsd.http.latency_95pct 1305305539 8 type=all host=i-00000106\",\"tsd.http.latency_50pct 1305305539 0 type=graph host=i-00000106\",\"tsd.http.latency_75pct 1305305539 0 type=graph host=i-00000106\",\"tsd.http.latency_90pct 1305305539 0 type=graph host=i-00000106\",\"tsd.http.latency_95pct 1305305539 0 type=graph host=i-00000106\",\"tsd.http.latency_50pct 1305305539 0 type=gnuplot host=i-00000106\",\"tsd.http.latency_75pct 1305305539 0 type=gnuplot host=i-00000106\",\"tsd.http.latency_90pct 1305305539 0 type=gnuplot host=i-00000106\",\"tsd.http.latency_95pct 1305305539 0 type=gnuplot host=i-00000106\",\"tsd.http.graph.requests 1305305539 0 cache=disk host=i-00000106\",\"tsd.http.graph.requests 1305305539 0 cache=miss host=i-00000106\",\"tsd.rpc.received 1305305539 118573 type=put host=i-00000106\",\"tsd.rpc.errors 1305305539 0 type=hbase_errors host=i-00000106\",\"tsd.rpc.errors 1305305539 0 type=invalid_values host=i-00000106\",\"tsd.rpc.errors 1305305539 0 type=illegal_arguments host=i-00000106\",\"tsd.rpc.errors 1305305539 34200 type=unknown_metrics host=i-00000106\",\"tsd.uid.cache-hit 1305305539 916 kind=metrics host=i-00000106\",\"tsd.uid.cache-miss 1305305539 34228 kind=metrics host=i-00000106\",\"tsd.uid.cache-size 1305305539 56 kind=metrics host=i-00000106\",\"tsd.uid.cache-hit 1305305539 4516 kind=tagk host=i-00000106\",\"tsd.uid.cache-miss 1305305539 10 kind=tagk host=i-00000106\",\"tsd.uid.cache-size 1305305539 20 kind=tagk host=i-00000106\",\"tsd.uid.cache-hit 1305305539 4459 kind=tagv host=i-00000106\",\"tsd.uid.cache-miss 1305305539 67 kind=tagv host=i-00000106\",\"tsd.uid.cache-size 1305305539 134 kind=tagv host=i-00000106\",\"tsd.jvm.ramfree 1305305539 20324560 host=i-00000106\",\"tsd.jvm.ramused 1305305539 38137856 host=i-00000106\",\"tsd.hbase.latency_50pct 1305305539 612 method=put host=i-00000106 class=IncomingDataPoints\",\"tsd.hbase.latency_75pct 1305305539 1124 method=put host=i-00000106 class=IncomingDataPoints\",\"tsd.hbase.latency_90pct 1305305539 1124 method=put host=i-00000106 class=IncomingDataPoints\",\"tsd.hbase.latency_95pct 1305305539 1124 method=put host=i-00000106 class=IncomingDataPoints\",\"tsd.hbase.latency_50pct 1305305539 0 method=scan host=i-00000106 class=TsdbQuery\",\"tsd.hbase.latency_75pct 1305305539 0 method=scan host=i-00000106 class=TsdbQuery\",\"tsd.hbase.latency_90pct 1305305539 0 method=scan host=i-00000106 class=TsdbQuery\",\"tsd.hbase.latency_95pct 1305305539 0 method=scan host=i-00000106 class=TsdbQuery\"]"
+    http_version: "1.1"
