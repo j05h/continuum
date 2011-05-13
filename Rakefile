@@ -12,3 +12,9 @@ Bundler::GemHelper.install_tasks
 task :irb do
   exec 'irb -I.:lib -rubygems -rcontinuum'
 end
+
+task :autotest do
+  exec 'autotest -b'
+end
+
+task :default= => :test

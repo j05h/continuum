@@ -1,5 +1,6 @@
 require 'hugs'
 require 'json'
+require 'socket'
 require 'continuum/client'
 
 ## Continuum

@@ -12,9 +12,11 @@ module Continuum
     #
     # A client to play with
     def initialize host = '127.0.0.1', port = 4242
+      @host = host
+      @port = port
       @client = Hugs::Client.new(
-        :host   => host,
-        :port   => port,
+        :host   => @host,
+        :port   => @port,
         :scheme => 'http',
         :type   => :none
       )
@@ -111,6 +113,19 @@ module Continuum
     def suggest query, type = 'metrics'
       response = @client.get "/suggest?q=#{query}&type=#{type}"
       JSON.parse response.body
+    end
+
+    # Format
+    # put <metric> <tisse> <value> host=<hostname>
+    # put proc.loadavg.5m 1305308654 0.01 host=i-00000106
+    def metric name, value
+      message = "put #{name} #{Time.now.to_i} #{value} host=#{Socket.gethostname}"
+
+      socket = TCPSocket.new @host, @port
+      socket.write message
+      socket.close
+
+      message
     end
 
     # Returns the version of OpenTSDB
