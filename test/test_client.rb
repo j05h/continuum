@@ -97,6 +97,22 @@ describe Continuum::Client do
     end
   end
 
+  describe :suggest do
+    before do
+      VCR.use_cassette 'suggest' do
+        @suggestions = @client.suggest 'proc', 'metrics'
+      end
+    end
+
+    it 'should return suggestions' do
+      assert_equal 10, @suggestions.length
+    end
+
+    it 'should have an appropriate suggestion' do
+      assert_match /^proc/, @suggestions.first
+    end
+  end
+
   describe :query_params do
     before do
       @hash = {

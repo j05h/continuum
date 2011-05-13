@@ -1,0 +1,24 @@
+--- 
+- !ruby/struct:VCR::HTTPInteraction 
+  request: !ruby/struct:VCR::Request 
+    method: :get
+    uri: http://10.3.172.58:4242/suggest?q=proc&type=metrics
+    body: 
+    headers: 
+      accept: 
+      - 
+      connection: 
+      - keep-alive
+      keep-alive: 
+      - 30
+  response: !ruby/struct:VCR::Response 
+    status: !ruby/struct:VCR::ResponseStatus 
+      code: 200
+      message: OK
+    headers: 
+      content-type: 
+      - application/json
+      content-length: 
+      - "175"
+    body: "[\"proc.net.bytes\",\"proc.net.dropped\",\"proc.net.errs\",\"proc.net.packets\",\"proc.net.tcp\",\"proc.stat.cpu\",\"proc.stat.ctxt\",\"proc.stat.intr\",\"proc.uptime.now\",\"proc.uptime.total\"]"
+    http_version: "1.1"

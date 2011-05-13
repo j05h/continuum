@@ -96,6 +96,23 @@ module Continuum
       JSON.parse response.body
     end
 
+    # Returns suggestions for metric or tag names.
+    #
+    # Params:
+    # * query: the string to search for
+    # * type: the type of item to search for (defaults to metrics)
+    # Type can be one of the following:
+    # * metrics: Provide suggestions for metric names.
+    # * tagk: Provide suggestions for tag names.
+    # * tagv: Provide suggestions for tag values.
+    #
+    # Returns:
+    # An Array of suggestions
+    def suggest query, type = 'metrics'
+      response = @client.get "/suggest?q=#{query}&type=#{type}"
+      JSON.parse response.body
+    end
+
     # Parses a query param hash into a query string as expected by OpenTSDB
     # *Params:*
     # * params the parameters to parse into a query string
