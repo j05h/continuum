@@ -107,9 +107,18 @@ module Continuum
     # * tagv: Provide suggestions for tag values.
     #
     # Returns:
-    # An Array of suggestions
+    # An array of suggestions
     def suggest query, type = 'metrics'
       response = @client.get "/suggest?q=#{query}&type=#{type}"
+      JSON.parse response.body
+    end
+
+    # Returns the version of OpenTSDB
+    #
+    # Returns
+    # An array with the version information
+    def version
+      response = @client.get '/version?json'
       JSON.parse response.body
     end
 

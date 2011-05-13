@@ -113,6 +113,18 @@ describe Continuum::Client do
     end
   end
 
+  describe :version do
+    before do
+      VCR.use_cassette 'version' do
+        @version = @client.version
+      end
+    end
+
+    it 'should have a version' do
+      assert_equal 7, @version.length
+    end
+  end
+
   describe :query_params do
     before do
       @hash = {
